@@ -1,0 +1,1994 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="/.FixedInvestmentMapper">
+	<resultMap id="BaseResultMap"
+		type="cn.sz.gz.pojo.FixedInvestment">
+		<id column="fixedInvestmentId" jdbcType="BIGINT"
+			property="fixedinvestmentid" />
+		<result column="fixedInvestmentIType" jdbcType="VARCHAR"
+			property="fixedinvestmentitype" />
+		<result column="cycle" jdbcType="VARCHAR" property="cycle" />
+		<result column="firstDeductionDate" jdbcType="TIMESTAMP"
+			property="firstdeductiondate" />
+		<result column="number" jdbcType="BIGINT" property="number" />
+		<result column="nextDeductionDate" jdbcType="TIMESTAMP"
+			property="nextdeductiondate" />
+		<result column="deductionAmount" jdbcType="DOUBLE"
+			property="deductionamount" />
+		<result column="deductionStatus" jdbcType="BIGINT"
+			property="deductionstatus" />
+		<result column="fundCode" jdbcType="BIGINT" property="fundcode" />
+		<result column="fundName" jdbcType="CHAR" property="fundname" />
+		<result column="bankCardNumber" jdbcType="BIGINT"
+			property="bankcardnumber" />
+		<result column="bankCardType" jdbcType="VARCHAR"
+			property="bankcardtype" />
+		<result column="payType" jdbcType="VARCHAR" property="paytype" />
+		<result column="fundId" jdbcType="BIGINT" property="fundid" />
+		<result column="userId" jdbcType="BIGINT" property="userid" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		fixedInvestmentId, fixedInvestmentIType, cycle, firstDeductionDate, number,
+		nextDeductionDate,
+		deductionAmount, deductionStatus, fundCode, fundName, bankCardNumber, bankCardType,
+		payType, fundId, userId
+	</sql>
+	<select id="selectByExample"
+		parameterType="cn.sz.gz.pojo.FixedInvestmentExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from fixed_investment
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from fixed_investment
+		where fixedInvestmentId = #{fixedinvestmentid,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from fixed_investment
+		where fixedInvestmentId = #{fixedinvestmentid,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="cn.sz.gz.pojo.FixedInvestmentExample">
+		delete from fixed_investment
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert"
+		parameterType="cn.sz.gz.pojo.FixedInvestment">
+		insert into fixed_investment (fixedInvestmentId, fixedInvestmentIType,
+		cycle, firstDeductionDate, number,
+		nextDeductionDate, deductionAmount, deductionStatus,
+		fundCode, fundName, bankCardNumber,
+		bankCardType, payType, fundId,
+		userId)
+		values (#{fixedinvestmentid,jdbcType=BIGINT},
+		#{fixedinvestmentitype,jdbcType=VARCHAR},
+		#{cycle,jdbcType=VARCHAR}, #{firstdeductiondate,jdbcType=TIMESTAMP}, #{number,jdbcType=BIGINT},
+		#{nextdeductiondate,jdbcType=TIMESTAMP},
+		#{deductionamount,jdbcType=DOUBLE},
+		#{deductionstatus,jdbcType=BIGINT},
+		#{fundcode,jdbcType=BIGINT}, #{fundname,jdbcType=CHAR}, #{bankcardnumber,jdbcType=BIGINT},
+		#{bankcardtype,jdbcType=VARCHAR}, #{paytype,jdbcType=VARCHAR},
+		#{fundid,jdbcType=BIGINT},
+		#{userid,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="cn.sz.gz.pojo.FixedInvestment">
+		insert into fixed_investment
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="fixedinvestmentid != null">
+				fixedInvestmentId,
+			</if>
+			<if test="fixedinvestmentitype != null">
+				fixedInvestmentIType,
+			</if>
+			<if test="cycle != null">
+				cycle,
+			</if>
+			<if test="firstdeductiondate != null">
+				firstDeductionDate,
+			</if>
+			<if test="number != null">
+				number,
+			</if>
+			<if test="nextdeductiondate != null">
+				nextDeductionDate,
+			</if>
+			<if test="deductionamount != null">
+				deductionAmount,
+			</if>
+			<if test="deductionstatus != null">
+				deductionStatus,
+			</if>
+			<if test="fundcode != null">
+				fundCode,
+			</if>
+			<if test="fundname != null">
+				fundName,
+			</if>
+			<if test="bankcardnumber != null">
+				bankCardNumber,
+			</if>
+			<if test="bankcardtype != null">
+				bankCardType,
+			</if>
+			<if test="paytype != null">
+				payType,
+			</if>
+			<if test="fundid != null">
+				fundId,
+			</if>
+			<if test="userid != null">
+				userId,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="fixedinvestmentid != null">
+				#{fixedinvestmentid,jdbcType=BIGINT},
+			</if>
+			<if test="fixedinvestmentitype != null">
+				#{fixedinvestmentitype,jdbcType=VARCHAR},
+			</if>
+			<if test="cycle != null">
+				#{cycle,jdbcType=VARCHAR},
+			</if>
+			<if test="firstdeductiondate != null">
+				#{firstdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="number != null">
+				#{number,jdbcType=BIGINT},
+			</if>
+			<if test="nextdeductiondate != null">
+				#{nextdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deductionamount != null">
+				#{deductionamount,jdbcType=DOUBLE},
+			</if>
+			<if test="deductionstatus != null">
+				#{deductionstatus,jdbcType=BIGINT},
+			</if>
+			<if test="fundcode != null">
+				#{fundcode,jdbcType=BIGINT},
+			</if>
+			<if test="fundname != null">
+				#{fundname,jdbcType=CHAR},
+			</if>
+			<if test="bankcardnumber != null">
+				#{bankcardnumber,jdbcType=BIGINT},
+			</if>
+			<if test="bankcardtype != null">
+				#{bankcardtype,jdbcType=VARCHAR},
+			</if>
+			<if test="paytype != null">
+				#{paytype,jdbcType=VARCHAR},
+			</if>
+			<if test="fundid != null">
+				#{fundid,jdbcType=BIGINT},
+			</if>
+			<if test="userid != null">
+				#{userid,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample"
+		parameterType="cn.sz.gz.pojo.FixedInvestmentExample"
+		resultType="java.lang.Integer">
+		select count(*) from fixed_investment
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update fixed_investment
+		<set>
+			<if test="record.fixedinvestmentid != null">
+				fixedInvestmentId = #{record.fixedinvestmentid,jdbcType=BIGINT},
+			</if>
+			<if test="record.fixedinvestmentitype != null">
+				fixedInvestmentIType = #{record.fixedinvestmentitype,jdbcType=VARCHAR},
+			</if>
+			<if test="record.cycle != null">
+				cycle = #{record.cycle,jdbcType=VARCHAR},
+			</if>
+			<if test="record.firstdeductiondate != null">
+				firstDeductionDate = #{record.firstdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.number != null">
+				number = #{record.number,jdbcType=BIGINT},
+			</if>
+			<if test="record.nextdeductiondate != null">
+				nextDeductionDate = #{record.nextdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.deductionamount != null">
+				deductionAmount = #{record.deductionamount,jdbcType=DOUBLE},
+			</if>
+			<if test="record.deductionstatus != null">
+				deductionStatus = #{record.deductionstatus,jdbcType=BIGINT},
+			</if>
+			<if test="record.fundcode != null">
+				fundCode = #{record.fundcode,jdbcType=BIGINT},
+			</if>
+			<if test="record.fundname != null">
+				fundName = #{record.fundname,jdbcType=CHAR},
+			</if>
+			<if test="record.bankcardnumber != null">
+				bankCardNumber = #{record.bankcardnumber,jdbcType=BIGINT},
+			</if>
+			<if test="record.bankcardtype != null">
+				bankCardType = #{record.bankcardtype,jdbcType=VARCHAR},
+			</if>
+			<if test="record.paytype != null">
+				payType = #{record.paytype,jdbcType=VARCHAR},
+			</if>
+			<if test="record.fundid != null">
+				fundId = #{record.fundid,jdbcType=BIGINT},
+			</if>
+			<if test="record.userid != null">
+				userId = #{record.userid,jdbcType=BIGINT},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update fixed_investment
+		set fixedInvestmentId = #{record.fixedinvestmentid,jdbcType=BIGINT},
+		fixedInvestmentIType =
+		#{record.fixedinvestmentitype,jdbcType=VARCHAR},
+		cycle = #{record.cycle,jdbcType=VARCHAR},
+		firstDeductionDate = #{record.firstdeductiondate,jdbcType=TIMESTAMP},
+		number = #{record.number,jdbcType=BIGINT},
+		nextDeductionDate = #{record.nextdeductiondate,jdbcType=TIMESTAMP},
+		deductionAmount = #{record.deductionamount,jdbcType=DOUBLE},
+		deductionStatus = #{record.deductionstatus,jdbcType=BIGINT},
+		fundCode = #{record.fundcode,jdbcType=BIGINT},
+		fundName = #{record.fundname,jdbcType=CHAR},
+		bankCardNumber = #{record.bankcardnumber,jdbcType=BIGINT},
+		bankCardType = #{record.bankcardtype,jdbcType=VARCHAR},
+		payType = #{record.paytype,jdbcType=VARCHAR},
+		fundId = #{record.fundid,jdbcType=BIGINT},
+		userId = #{record.userid,jdbcType=BIGINT}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="cn.sz.gz.pojo.FixedInvestment">
+		update fixed_investment
+		<set>
+			<if test="fixedinvestmentitype != null">
+				fixedInvestmentIType = #{fixedinvestmentitype,jdbcType=VARCHAR},
+			</if>
+			<if test="cycle != null">
+				cycle = #{cycle,jdbcType=VARCHAR},
+			</if>
+			<if test="firstdeductiondate != null">
+				firstDeductionDate = #{firstdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="number != null">
+				number = #{number,jdbcType=BIGINT},
+			</if>
+			<if test="nextdeductiondate != null">
+				nextDeductionDate = #{nextdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deductionamount != null">
+				deductionAmount = #{deductionamount,jdbcType=DOUBLE},
+			</if>
+			<if test="deductionstatus != null">
+				deductionStatus = #{deductionstatus,jdbcType=BIGINT},
+			</if>
+			<if test="fundcode != null">
+				fundCode = #{fundcode,jdbcType=BIGINT},
+			</if>
+			<if test="fundname != null">
+				fundName = #{fundname,jdbcType=CHAR},
+			</if>
+			<if test="bankcardnumber != null">
+				bankCardNumber = #{bankcardnumber,jdbcType=BIGINT},
+			</if>
+			<if test="bankcardtype != null">
+				bankCardType = #{bankcardtype,jdbcType=VARCHAR},
+			</if>
+			<if test="paytype != null">
+				payType = #{paytype,jdbcType=VARCHAR},
+			</if>
+			<if test="fundid != null">
+				fundId = #{fundid,jdbcType=BIGINT},
+			</if>
+			<if test="userid != null">
+				userId = #{userid,jdbcType=BIGINT},
+			</if>
+		</set>
+		where fixedInvestmentId = #{fixedinvestmentid,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="cn.sz.gz.pojo.FixedInvestment">
+		update fixed_investment
+		set fixedInvestmentIType = #{fixedinvestmentitype,jdbcType=VARCHAR},
+		cycle = #{cycle,jdbcType=VARCHAR},
+		firstDeductionDate = #{firstdeductiondate,jdbcType=TIMESTAMP},
+		number = #{number,jdbcType=BIGINT},
+		nextDeductionDate = #{nextdeductiondate,jdbcType=TIMESTAMP},
+		deductionAmount = #{deductionamount,jdbcType=DOUBLE},
+		deductionStatus = #{deductionstatus,jdbcType=BIGINT},
+		fundCode = #{fundcode,jdbcType=BIGINT},
+		fundName = #{fundname,jdbcType=CHAR},
+		bankCardNumber = #{bankcardnumber,jdbcType=BIGINT},
+		bankCardType = #{bankcardtype,jdbcType=VARCHAR},
+		payType = #{paytype,jdbcType=VARCHAR},
+		fundId = #{fundid,jdbcType=BIGINT},
+		userId = #{userid,jdbcType=BIGINT}
+		where fixedInvestmentId = #{fixedinvestmentid,jdbcType=BIGINT}
+	</update>
+	<resultMap id="BaseResultMap"
+		type="cn.sz.gz.pojo.FixedInvestment">
+		<id column="fixedInvestmentId" jdbcType="BIGINT"
+			property="fixedinvestmentid" />
+		<result column="fixedInvestmentIType" jdbcType="VARCHAR"
+			property="fixedinvestmentitype" />
+		<result column="cycle" jdbcType="VARCHAR" property="cycle" />
+		<result column="firstDeductionDate" jdbcType="TIMESTAMP"
+			property="firstdeductiondate" />
+		<result column="number" jdbcType="BIGINT" property="number" />
+		<result column="nextDeductionDate" jdbcType="TIMESTAMP"
+			property="nextdeductiondate" />
+		<result column="deductionAmount" jdbcType="DOUBLE"
+			property="deductionamount" />
+		<result column="deductionStatus" jdbcType="BIGINT"
+			property="deductionstatus" />
+		<result column="fundCode" jdbcType="BIGINT" property="fundcode" />
+		<result column="fundName" jdbcType="CHAR" property="fundname" />
+		<result column="bankCardNumber" jdbcType="BIGINT"
+			property="bankcardnumber" />
+		<result column="bankCardType" jdbcType="VARCHAR"
+			property="bankcardtype" />
+		<result column="payType" jdbcType="VARCHAR" property="paytype" />
+		<result column="fundId" jdbcType="BIGINT" property="fundid" />
+		<result column="userId" jdbcType="BIGINT" property="userid" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		fixedInvestmentId, fixedInvestmentIType, cycle, firstDeductionDate, number,
+		nextDeductionDate,
+		deductionAmount, deductionStatus, fundCode, fundName, bankCardNumber, bankCardType,
+		payType, fundId, userId
+	</sql>
+	<select id="selectByExample"
+		parameterType="cn.sz.gz.pojo.FixedInvestmentExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from fixed_investment
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from fixed_investment
+		where fixedInvestmentId = #{fixedinvestmentid,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from fixed_investment
+		where fixedInvestmentId = #{fixedinvestmentid,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="cn.sz.gz.pojo.FixedInvestmentExample">
+		delete from fixed_investment
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert"
+		parameterType="cn.sz.gz.pojo.FixedInvestment">
+		insert into fixed_investment (fixedInvestmentId, fixedInvestmentIType,
+		cycle, firstDeductionDate, number,
+		nextDeductionDate, deductionAmount, deductionStatus,
+		fundCode, fundName, bankCardNumber,
+		bankCardType, payType, fundId,
+		userId)
+		values (#{fixedinvestmentid,jdbcType=BIGINT},
+		#{fixedinvestmentitype,jdbcType=VARCHAR},
+		#{cycle,jdbcType=VARCHAR}, #{firstdeductiondate,jdbcType=TIMESTAMP}, #{number,jdbcType=BIGINT},
+		#{nextdeductiondate,jdbcType=TIMESTAMP},
+		#{deductionamount,jdbcType=DOUBLE},
+		#{deductionstatus,jdbcType=BIGINT},
+		#{fundcode,jdbcType=BIGINT}, #{fundname,jdbcType=CHAR}, #{bankcardnumber,jdbcType=BIGINT},
+		#{bankcardtype,jdbcType=VARCHAR}, #{paytype,jdbcType=VARCHAR},
+		#{fundid,jdbcType=BIGINT},
+		#{userid,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="cn.sz.gz.pojo.FixedInvestment">
+		insert into fixed_investment
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="fixedinvestmentid != null">
+				fixedInvestmentId,
+			</if>
+			<if test="fixedinvestmentitype != null">
+				fixedInvestmentIType,
+			</if>
+			<if test="cycle != null">
+				cycle,
+			</if>
+			<if test="firstdeductiondate != null">
+				firstDeductionDate,
+			</if>
+			<if test="number != null">
+				number,
+			</if>
+			<if test="nextdeductiondate != null">
+				nextDeductionDate,
+			</if>
+			<if test="deductionamount != null">
+				deductionAmount,
+			</if>
+			<if test="deductionstatus != null">
+				deductionStatus,
+			</if>
+			<if test="fundcode != null">
+				fundCode,
+			</if>
+			<if test="fundname != null">
+				fundName,
+			</if>
+			<if test="bankcardnumber != null">
+				bankCardNumber,
+			</if>
+			<if test="bankcardtype != null">
+				bankCardType,
+			</if>
+			<if test="paytype != null">
+				payType,
+			</if>
+			<if test="fundid != null">
+				fundId,
+			</if>
+			<if test="userid != null">
+				userId,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="fixedinvestmentid != null">
+				#{fixedinvestmentid,jdbcType=BIGINT},
+			</if>
+			<if test="fixedinvestmentitype != null">
+				#{fixedinvestmentitype,jdbcType=VARCHAR},
+			</if>
+			<if test="cycle != null">
+				#{cycle,jdbcType=VARCHAR},
+			</if>
+			<if test="firstdeductiondate != null">
+				#{firstdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="number != null">
+				#{number,jdbcType=BIGINT},
+			</if>
+			<if test="nextdeductiondate != null">
+				#{nextdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deductionamount != null">
+				#{deductionamount,jdbcType=DOUBLE},
+			</if>
+			<if test="deductionstatus != null">
+				#{deductionstatus,jdbcType=BIGINT},
+			</if>
+			<if test="fundcode != null">
+				#{fundcode,jdbcType=BIGINT},
+			</if>
+			<if test="fundname != null">
+				#{fundname,jdbcType=CHAR},
+			</if>
+			<if test="bankcardnumber != null">
+				#{bankcardnumber,jdbcType=BIGINT},
+			</if>
+			<if test="bankcardtype != null">
+				#{bankcardtype,jdbcType=VARCHAR},
+			</if>
+			<if test="paytype != null">
+				#{paytype,jdbcType=VARCHAR},
+			</if>
+			<if test="fundid != null">
+				#{fundid,jdbcType=BIGINT},
+			</if>
+			<if test="userid != null">
+				#{userid,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample"
+		parameterType="cn.sz.gz.pojo.FixedInvestmentExample"
+		resultType="java.lang.Integer">
+		select count(*) from fixed_investment
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update fixed_investment
+		<set>
+			<if test="record.fixedinvestmentid != null">
+				fixedInvestmentId = #{record.fixedinvestmentid,jdbcType=BIGINT},
+			</if>
+			<if test="record.fixedinvestmentitype != null">
+				fixedInvestmentIType = #{record.fixedinvestmentitype,jdbcType=VARCHAR},
+			</if>
+			<if test="record.cycle != null">
+				cycle = #{record.cycle,jdbcType=VARCHAR},
+			</if>
+			<if test="record.firstdeductiondate != null">
+				firstDeductionDate = #{record.firstdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.number != null">
+				number = #{record.number,jdbcType=BIGINT},
+			</if>
+			<if test="record.nextdeductiondate != null">
+				nextDeductionDate = #{record.nextdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.deductionamount != null">
+				deductionAmount = #{record.deductionamount,jdbcType=DOUBLE},
+			</if>
+			<if test="record.deductionstatus != null">
+				deductionStatus = #{record.deductionstatus,jdbcType=BIGINT},
+			</if>
+			<if test="record.fundcode != null">
+				fundCode = #{record.fundcode,jdbcType=BIGINT},
+			</if>
+			<if test="record.fundname != null">
+				fundName = #{record.fundname,jdbcType=CHAR},
+			</if>
+			<if test="record.bankcardnumber != null">
+				bankCardNumber = #{record.bankcardnumber,jdbcType=BIGINT},
+			</if>
+			<if test="record.bankcardtype != null">
+				bankCardType = #{record.bankcardtype,jdbcType=VARCHAR},
+			</if>
+			<if test="record.paytype != null">
+				payType = #{record.paytype,jdbcType=VARCHAR},
+			</if>
+			<if test="record.fundid != null">
+				fundId = #{record.fundid,jdbcType=BIGINT},
+			</if>
+			<if test="record.userid != null">
+				userId = #{record.userid,jdbcType=BIGINT},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update fixed_investment
+		set fixedInvestmentId = #{record.fixedinvestmentid,jdbcType=BIGINT},
+		fixedInvestmentIType =
+		#{record.fixedinvestmentitype,jdbcType=VARCHAR},
+		cycle = #{record.cycle,jdbcType=VARCHAR},
+		firstDeductionDate = #{record.firstdeductiondate,jdbcType=TIMESTAMP},
+		number = #{record.number,jdbcType=BIGINT},
+		nextDeductionDate = #{record.nextdeductiondate,jdbcType=TIMESTAMP},
+		deductionAmount = #{record.deductionamount,jdbcType=DOUBLE},
+		deductionStatus = #{record.deductionstatus,jdbcType=BIGINT},
+		fundCode = #{record.fundcode,jdbcType=BIGINT},
+		fundName = #{record.fundname,jdbcType=CHAR},
+		bankCardNumber = #{record.bankcardnumber,jdbcType=BIGINT},
+		bankCardType = #{record.bankcardtype,jdbcType=VARCHAR},
+		payType = #{record.paytype,jdbcType=VARCHAR},
+		fundId = #{record.fundid,jdbcType=BIGINT},
+		userId = #{record.userid,jdbcType=BIGINT}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="cn.sz.gz.pojo.FixedInvestment">
+		update fixed_investment
+		<set>
+			<if test="fixedinvestmentitype != null">
+				fixedInvestmentIType = #{fixedinvestmentitype,jdbcType=VARCHAR},
+			</if>
+			<if test="cycle != null">
+				cycle = #{cycle,jdbcType=VARCHAR},
+			</if>
+			<if test="firstdeductiondate != null">
+				firstDeductionDate = #{firstdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="number != null">
+				number = #{number,jdbcType=BIGINT},
+			</if>
+			<if test="nextdeductiondate != null">
+				nextDeductionDate = #{nextdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deductionamount != null">
+				deductionAmount = #{deductionamount,jdbcType=DOUBLE},
+			</if>
+			<if test="deductionstatus != null">
+				deductionStatus = #{deductionstatus,jdbcType=BIGINT},
+			</if>
+			<if test="fundcode != null">
+				fundCode = #{fundcode,jdbcType=BIGINT},
+			</if>
+			<if test="fundname != null">
+				fundName = #{fundname,jdbcType=CHAR},
+			</if>
+			<if test="bankcardnumber != null">
+				bankCardNumber = #{bankcardnumber,jdbcType=BIGINT},
+			</if>
+			<if test="bankcardtype != null">
+				bankCardType = #{bankcardtype,jdbcType=VARCHAR},
+			</if>
+			<if test="paytype != null">
+				payType = #{paytype,jdbcType=VARCHAR},
+			</if>
+			<if test="fundid != null">
+				fundId = #{fundid,jdbcType=BIGINT},
+			</if>
+			<if test="userid != null">
+				userId = #{userid,jdbcType=BIGINT},
+			</if>
+		</set>
+		where fixedInvestmentId = #{fixedinvestmentid,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="cn.sz.gz.pojo.FixedInvestment">
+		update fixed_investment
+		set fixedInvestmentIType = #{fixedinvestmentitype,jdbcType=VARCHAR},
+		cycle = #{cycle,jdbcType=VARCHAR},
+		firstDeductionDate = #{firstdeductiondate,jdbcType=TIMESTAMP},
+		number = #{number,jdbcType=BIGINT},
+		nextDeductionDate = #{nextdeductiondate,jdbcType=TIMESTAMP},
+		deductionAmount = #{deductionamount,jdbcType=DOUBLE},
+		deductionStatus = #{deductionstatus,jdbcType=BIGINT},
+		fundCode = #{fundcode,jdbcType=BIGINT},
+		fundName = #{fundname,jdbcType=CHAR},
+		bankCardNumber = #{bankcardnumber,jdbcType=BIGINT},
+		bankCardType = #{bankcardtype,jdbcType=VARCHAR},
+		payType = #{paytype,jdbcType=VARCHAR},
+		fundId = #{fundid,jdbcType=BIGINT},
+		userId = #{userid,jdbcType=BIGINT}
+		where fixedInvestmentId = #{fixedinvestmentid,jdbcType=BIGINT}
+	</update>
+	<resultMap id="BaseResultMap"
+		type="cn.sz.gz.pojo.FixedInvestment">
+		<id column="fixedInvestmentId" jdbcType="BIGINT"
+			property="fixedinvestmentid" />
+		<result column="fixedInvestmentIType" jdbcType="VARCHAR"
+			property="fixedinvestmentitype" />
+		<result column="cycle" jdbcType="VARCHAR" property="cycle" />
+		<result column="firstDeductionDate" jdbcType="TIMESTAMP"
+			property="firstdeductiondate" />
+		<result column="number" jdbcType="BIGINT" property="number" />
+		<result column="nextDeductionDate" jdbcType="TIMESTAMP"
+			property="nextdeductiondate" />
+		<result column="deductionAmount" jdbcType="DOUBLE"
+			property="deductionamount" />
+		<result column="deductionStatus" jdbcType="BIGINT"
+			property="deductionstatus" />
+		<result column="fundCode" jdbcType="BIGINT" property="fundcode" />
+		<result column="fundName" jdbcType="CHAR" property="fundname" />
+		<result column="bankCardNumber" jdbcType="BIGINT"
+			property="bankcardnumber" />
+		<result column="bankCardType" jdbcType="VARCHAR"
+			property="bankcardtype" />
+		<result column="payType" jdbcType="VARCHAR" property="paytype" />
+		<result column="fundId" jdbcType="BIGINT" property="fundid" />
+		<result column="userId" jdbcType="BIGINT" property="userid" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		fixedInvestmentId, fixedInvestmentIType, cycle, firstDeductionDate, number,
+		nextDeductionDate,
+		deductionAmount, deductionStatus, fundCode, fundName, bankCardNumber, bankCardType,
+		payType, fundId, userId
+	</sql>
+	<select id="selectByExample"
+		parameterType="cn.sz.gz.pojo.FixedInvestmentExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from fixed_investment
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from fixed_investment
+		where fixedInvestmentId = #{fixedinvestmentid,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from fixed_investment
+		where fixedInvestmentId = #{fixedinvestmentid,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="cn.sz.gz.pojo.FixedInvestmentExample">
+		delete from fixed_investment
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert"
+		parameterType="cn.sz.gz.pojo.FixedInvestment">
+		insert into fixed_investment (fixedInvestmentId, fixedInvestmentIType,
+		cycle, firstDeductionDate, number,
+		nextDeductionDate, deductionAmount, deductionStatus,
+		fundCode, fundName, bankCardNumber,
+		bankCardType, payType, fundId,
+		userId)
+		values (#{fixedinvestmentid,jdbcType=BIGINT},
+		#{fixedinvestmentitype,jdbcType=VARCHAR},
+		#{cycle,jdbcType=VARCHAR}, #{firstdeductiondate,jdbcType=TIMESTAMP}, #{number,jdbcType=BIGINT},
+		#{nextdeductiondate,jdbcType=TIMESTAMP},
+		#{deductionamount,jdbcType=DOUBLE},
+		#{deductionstatus,jdbcType=BIGINT},
+		#{fundcode,jdbcType=BIGINT}, #{fundname,jdbcType=CHAR}, #{bankcardnumber,jdbcType=BIGINT},
+		#{bankcardtype,jdbcType=VARCHAR}, #{paytype,jdbcType=VARCHAR},
+		#{fundid,jdbcType=BIGINT},
+		#{userid,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="cn.sz.gz.pojo.FixedInvestment">
+		insert into fixed_investment
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="fixedinvestmentid != null">
+				fixedInvestmentId,
+			</if>
+			<if test="fixedinvestmentitype != null">
+				fixedInvestmentIType,
+			</if>
+			<if test="cycle != null">
+				cycle,
+			</if>
+			<if test="firstdeductiondate != null">
+				firstDeductionDate,
+			</if>
+			<if test="number != null">
+				number,
+			</if>
+			<if test="nextdeductiondate != null">
+				nextDeductionDate,
+			</if>
+			<if test="deductionamount != null">
+				deductionAmount,
+			</if>
+			<if test="deductionstatus != null">
+				deductionStatus,
+			</if>
+			<if test="fundcode != null">
+				fundCode,
+			</if>
+			<if test="fundname != null">
+				fundName,
+			</if>
+			<if test="bankcardnumber != null">
+				bankCardNumber,
+			</if>
+			<if test="bankcardtype != null">
+				bankCardType,
+			</if>
+			<if test="paytype != null">
+				payType,
+			</if>
+			<if test="fundid != null">
+				fundId,
+			</if>
+			<if test="userid != null">
+				userId,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="fixedinvestmentid != null">
+				#{fixedinvestmentid,jdbcType=BIGINT},
+			</if>
+			<if test="fixedinvestmentitype != null">
+				#{fixedinvestmentitype,jdbcType=VARCHAR},
+			</if>
+			<if test="cycle != null">
+				#{cycle,jdbcType=VARCHAR},
+			</if>
+			<if test="firstdeductiondate != null">
+				#{firstdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="number != null">
+				#{number,jdbcType=BIGINT},
+			</if>
+			<if test="nextdeductiondate != null">
+				#{nextdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deductionamount != null">
+				#{deductionamount,jdbcType=DOUBLE},
+			</if>
+			<if test="deductionstatus != null">
+				#{deductionstatus,jdbcType=BIGINT},
+			</if>
+			<if test="fundcode != null">
+				#{fundcode,jdbcType=BIGINT},
+			</if>
+			<if test="fundname != null">
+				#{fundname,jdbcType=CHAR},
+			</if>
+			<if test="bankcardnumber != null">
+				#{bankcardnumber,jdbcType=BIGINT},
+			</if>
+			<if test="bankcardtype != null">
+				#{bankcardtype,jdbcType=VARCHAR},
+			</if>
+			<if test="paytype != null">
+				#{paytype,jdbcType=VARCHAR},
+			</if>
+			<if test="fundid != null">
+				#{fundid,jdbcType=BIGINT},
+			</if>
+			<if test="userid != null">
+				#{userid,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample"
+		parameterType="cn.sz.gz.pojo.FixedInvestmentExample"
+		resultType="java.lang.Integer">
+		select count(*) from fixed_investment
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update fixed_investment
+		<set>
+			<if test="record.fixedinvestmentid != null">
+				fixedInvestmentId = #{record.fixedinvestmentid,jdbcType=BIGINT},
+			</if>
+			<if test="record.fixedinvestmentitype != null">
+				fixedInvestmentIType = #{record.fixedinvestmentitype,jdbcType=VARCHAR},
+			</if>
+			<if test="record.cycle != null">
+				cycle = #{record.cycle,jdbcType=VARCHAR},
+			</if>
+			<if test="record.firstdeductiondate != null">
+				firstDeductionDate = #{record.firstdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.number != null">
+				number = #{record.number,jdbcType=BIGINT},
+			</if>
+			<if test="record.nextdeductiondate != null">
+				nextDeductionDate = #{record.nextdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.deductionamount != null">
+				deductionAmount = #{record.deductionamount,jdbcType=DOUBLE},
+			</if>
+			<if test="record.deductionstatus != null">
+				deductionStatus = #{record.deductionstatus,jdbcType=BIGINT},
+			</if>
+			<if test="record.fundcode != null">
+				fundCode = #{record.fundcode,jdbcType=BIGINT},
+			</if>
+			<if test="record.fundname != null">
+				fundName = #{record.fundname,jdbcType=CHAR},
+			</if>
+			<if test="record.bankcardnumber != null">
+				bankCardNumber = #{record.bankcardnumber,jdbcType=BIGINT},
+			</if>
+			<if test="record.bankcardtype != null">
+				bankCardType = #{record.bankcardtype,jdbcType=VARCHAR},
+			</if>
+			<if test="record.paytype != null">
+				payType = #{record.paytype,jdbcType=VARCHAR},
+			</if>
+			<if test="record.fundid != null">
+				fundId = #{record.fundid,jdbcType=BIGINT},
+			</if>
+			<if test="record.userid != null">
+				userId = #{record.userid,jdbcType=BIGINT},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update fixed_investment
+		set fixedInvestmentId = #{record.fixedinvestmentid,jdbcType=BIGINT},
+		fixedInvestmentIType =
+		#{record.fixedinvestmentitype,jdbcType=VARCHAR},
+		cycle = #{record.cycle,jdbcType=VARCHAR},
+		firstDeductionDate = #{record.firstdeductiondate,jdbcType=TIMESTAMP},
+		number = #{record.number,jdbcType=BIGINT},
+		nextDeductionDate = #{record.nextdeductiondate,jdbcType=TIMESTAMP},
+		deductionAmount = #{record.deductionamount,jdbcType=DOUBLE},
+		deductionStatus = #{record.deductionstatus,jdbcType=BIGINT},
+		fundCode = #{record.fundcode,jdbcType=BIGINT},
+		fundName = #{record.fundname,jdbcType=CHAR},
+		bankCardNumber = #{record.bankcardnumber,jdbcType=BIGINT},
+		bankCardType = #{record.bankcardtype,jdbcType=VARCHAR},
+		payType = #{record.paytype,jdbcType=VARCHAR},
+		fundId = #{record.fundid,jdbcType=BIGINT},
+		userId = #{record.userid,jdbcType=BIGINT}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="cn.sz.gz.pojo.FixedInvestment">
+		update fixed_investment
+		<set>
+			<if test="fixedinvestmentitype != null">
+				fixedInvestmentIType = #{fixedinvestmentitype,jdbcType=VARCHAR},
+			</if>
+			<if test="cycle != null">
+				cycle = #{cycle,jdbcType=VARCHAR},
+			</if>
+			<if test="firstdeductiondate != null">
+				firstDeductionDate = #{firstdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="number != null">
+				number = #{number,jdbcType=BIGINT},
+			</if>
+			<if test="nextdeductiondate != null">
+				nextDeductionDate = #{nextdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deductionamount != null">
+				deductionAmount = #{deductionamount,jdbcType=DOUBLE},
+			</if>
+			<if test="deductionstatus != null">
+				deductionStatus = #{deductionstatus,jdbcType=BIGINT},
+			</if>
+			<if test="fundcode != null">
+				fundCode = #{fundcode,jdbcType=BIGINT},
+			</if>
+			<if test="fundname != null">
+				fundName = #{fundname,jdbcType=CHAR},
+			</if>
+			<if test="bankcardnumber != null">
+				bankCardNumber = #{bankcardnumber,jdbcType=BIGINT},
+			</if>
+			<if test="bankcardtype != null">
+				bankCardType = #{bankcardtype,jdbcType=VARCHAR},
+			</if>
+			<if test="paytype != null">
+				payType = #{paytype,jdbcType=VARCHAR},
+			</if>
+			<if test="fundid != null">
+				fundId = #{fundid,jdbcType=BIGINT},
+			</if>
+			<if test="userid != null">
+				userId = #{userid,jdbcType=BIGINT},
+			</if>
+		</set>
+		where fixedInvestmentId = #{fixedinvestmentid,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="cn.sz.gz.pojo.FixedInvestment">
+		update fixed_investment
+		set fixedInvestmentIType = #{fixedinvestmentitype,jdbcType=VARCHAR},
+		cycle = #{cycle,jdbcType=VARCHAR},
+		firstDeductionDate = #{firstdeductiondate,jdbcType=TIMESTAMP},
+		number = #{number,jdbcType=BIGINT},
+		nextDeductionDate = #{nextdeductiondate,jdbcType=TIMESTAMP},
+		deductionAmount = #{deductionamount,jdbcType=DOUBLE},
+		deductionStatus = #{deductionstatus,jdbcType=BIGINT},
+		fundCode = #{fundcode,jdbcType=BIGINT},
+		fundName = #{fundname,jdbcType=CHAR},
+		bankCardNumber = #{bankcardnumber,jdbcType=BIGINT},
+		bankCardType = #{bankcardtype,jdbcType=VARCHAR},
+		payType = #{paytype,jdbcType=VARCHAR},
+		fundId = #{fundid,jdbcType=BIGINT},
+		userId = #{userid,jdbcType=BIGINT}
+		where fixedInvestmentId = #{fixedinvestmentid,jdbcType=BIGINT}
+	</update>
+	<resultMap id="BaseResultMap"
+		type="cn.sz.gz.pojo.FixedInvestment">
+		<id column="fixedInvestmentId" jdbcType="BIGINT"
+			property="fixedinvestmentid" />
+		<result column="fixedInvestmentIType" jdbcType="VARCHAR"
+			property="fixedinvestmentitype" />
+		<result column="cycle" jdbcType="VARCHAR" property="cycle" />
+		<result column="firstDeductionDate" jdbcType="TIMESTAMP"
+			property="firstdeductiondate" />
+		<result column="number" jdbcType="BIGINT" property="number" />
+		<result column="nextDeductionDate" jdbcType="TIMESTAMP"
+			property="nextdeductiondate" />
+		<result column="deductionAmount" jdbcType="DOUBLE"
+			property="deductionamount" />
+		<result column="deductionStatus" jdbcType="BIGINT"
+			property="deductionstatus" />
+		<result column="fundCode" jdbcType="BIGINT" property="fundcode" />
+		<result column="fundName" jdbcType="CHAR" property="fundname" />
+		<result column="bankCardNumber" jdbcType="BIGINT"
+			property="bankcardnumber" />
+		<result column="bankCardType" jdbcType="VARCHAR"
+			property="bankcardtype" />
+		<result column="payType" jdbcType="VARCHAR" property="paytype" />
+		<result column="fundId" jdbcType="BIGINT" property="fundid" />
+		<result column="userId" jdbcType="BIGINT" property="userid" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		fixedInvestmentId, fixedInvestmentIType, cycle, firstDeductionDate, number,
+		nextDeductionDate,
+		deductionAmount, deductionStatus, fundCode, fundName, bankCardNumber, bankCardType,
+		payType, fundId, userId
+	</sql>
+	<select id="selectByExample"
+		parameterType="cn.sz.gz.pojo.FixedInvestmentExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from fixed_investment
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from fixed_investment
+		where fixedInvestmentId = #{fixedinvestmentid,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from fixed_investment
+		where fixedInvestmentId = #{fixedinvestmentid,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="cn.sz.gz.pojo.FixedInvestmentExample">
+		delete from fixed_investment
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert"
+		parameterType="cn.sz.gz.pojo.FixedInvestment">
+		insert into fixed_investment (fixedInvestmentId, fixedInvestmentIType,
+		cycle, firstDeductionDate, number,
+		nextDeductionDate, deductionAmount, deductionStatus,
+		fundCode, fundName, bankCardNumber,
+		bankCardType, payType, fundId,
+		userId)
+		values (#{fixedinvestmentid,jdbcType=BIGINT},
+		#{fixedinvestmentitype,jdbcType=VARCHAR},
+		#{cycle,jdbcType=VARCHAR}, #{firstdeductiondate,jdbcType=TIMESTAMP}, #{number,jdbcType=BIGINT},
+		#{nextdeductiondate,jdbcType=TIMESTAMP},
+		#{deductionamount,jdbcType=DOUBLE},
+		#{deductionstatus,jdbcType=BIGINT},
+		#{fundcode,jdbcType=BIGINT}, #{fundname,jdbcType=CHAR}, #{bankcardnumber,jdbcType=BIGINT},
+		#{bankcardtype,jdbcType=VARCHAR}, #{paytype,jdbcType=VARCHAR},
+		#{fundid,jdbcType=BIGINT},
+		#{userid,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="cn.sz.gz.pojo.FixedInvestment">
+		insert into fixed_investment
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="fixedinvestmentid != null">
+				fixedInvestmentId,
+			</if>
+			<if test="fixedinvestmentitype != null">
+				fixedInvestmentIType,
+			</if>
+			<if test="cycle != null">
+				cycle,
+			</if>
+			<if test="firstdeductiondate != null">
+				firstDeductionDate,
+			</if>
+			<if test="number != null">
+				number,
+			</if>
+			<if test="nextdeductiondate != null">
+				nextDeductionDate,
+			</if>
+			<if test="deductionamount != null">
+				deductionAmount,
+			</if>
+			<if test="deductionstatus != null">
+				deductionStatus,
+			</if>
+			<if test="fundcode != null">
+				fundCode,
+			</if>
+			<if test="fundname != null">
+				fundName,
+			</if>
+			<if test="bankcardnumber != null">
+				bankCardNumber,
+			</if>
+			<if test="bankcardtype != null">
+				bankCardType,
+			</if>
+			<if test="paytype != null">
+				payType,
+			</if>
+			<if test="fundid != null">
+				fundId,
+			</if>
+			<if test="userid != null">
+				userId,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="fixedinvestmentid != null">
+				#{fixedinvestmentid,jdbcType=BIGINT},
+			</if>
+			<if test="fixedinvestmentitype != null">
+				#{fixedinvestmentitype,jdbcType=VARCHAR},
+			</if>
+			<if test="cycle != null">
+				#{cycle,jdbcType=VARCHAR},
+			</if>
+			<if test="firstdeductiondate != null">
+				#{firstdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="number != null">
+				#{number,jdbcType=BIGINT},
+			</if>
+			<if test="nextdeductiondate != null">
+				#{nextdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deductionamount != null">
+				#{deductionamount,jdbcType=DOUBLE},
+			</if>
+			<if test="deductionstatus != null">
+				#{deductionstatus,jdbcType=BIGINT},
+			</if>
+			<if test="fundcode != null">
+				#{fundcode,jdbcType=BIGINT},
+			</if>
+			<if test="fundname != null">
+				#{fundname,jdbcType=CHAR},
+			</if>
+			<if test="bankcardnumber != null">
+				#{bankcardnumber,jdbcType=BIGINT},
+			</if>
+			<if test="bankcardtype != null">
+				#{bankcardtype,jdbcType=VARCHAR},
+			</if>
+			<if test="paytype != null">
+				#{paytype,jdbcType=VARCHAR},
+			</if>
+			<if test="fundid != null">
+				#{fundid,jdbcType=BIGINT},
+			</if>
+			<if test="userid != null">
+				#{userid,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample"
+		parameterType="cn.sz.gz.pojo.FixedInvestmentExample"
+		resultType="java.lang.Integer">
+		select count(*) from fixed_investment
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update fixed_investment
+		<set>
+			<if test="record.fixedinvestmentid != null">
+				fixedInvestmentId = #{record.fixedinvestmentid,jdbcType=BIGINT},
+			</if>
+			<if test="record.fixedinvestmentitype != null">
+				fixedInvestmentIType = #{record.fixedinvestmentitype,jdbcType=VARCHAR},
+			</if>
+			<if test="record.cycle != null">
+				cycle = #{record.cycle,jdbcType=VARCHAR},
+			</if>
+			<if test="record.firstdeductiondate != null">
+				firstDeductionDate = #{record.firstdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.number != null">
+				number = #{record.number,jdbcType=BIGINT},
+			</if>
+			<if test="record.nextdeductiondate != null">
+				nextDeductionDate = #{record.nextdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.deductionamount != null">
+				deductionAmount = #{record.deductionamount,jdbcType=DOUBLE},
+			</if>
+			<if test="record.deductionstatus != null">
+				deductionStatus = #{record.deductionstatus,jdbcType=BIGINT},
+			</if>
+			<if test="record.fundcode != null">
+				fundCode = #{record.fundcode,jdbcType=BIGINT},
+			</if>
+			<if test="record.fundname != null">
+				fundName = #{record.fundname,jdbcType=CHAR},
+			</if>
+			<if test="record.bankcardnumber != null">
+				bankCardNumber = #{record.bankcardnumber,jdbcType=BIGINT},
+			</if>
+			<if test="record.bankcardtype != null">
+				bankCardType = #{record.bankcardtype,jdbcType=VARCHAR},
+			</if>
+			<if test="record.paytype != null">
+				payType = #{record.paytype,jdbcType=VARCHAR},
+			</if>
+			<if test="record.fundid != null">
+				fundId = #{record.fundid,jdbcType=BIGINT},
+			</if>
+			<if test="record.userid != null">
+				userId = #{record.userid,jdbcType=BIGINT},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update fixed_investment
+		set fixedInvestmentId = #{record.fixedinvestmentid,jdbcType=BIGINT},
+		fixedInvestmentIType =
+		#{record.fixedinvestmentitype,jdbcType=VARCHAR},
+		cycle = #{record.cycle,jdbcType=VARCHAR},
+		firstDeductionDate = #{record.firstdeductiondate,jdbcType=TIMESTAMP},
+		number = #{record.number,jdbcType=BIGINT},
+		nextDeductionDate = #{record.nextdeductiondate,jdbcType=TIMESTAMP},
+		deductionAmount = #{record.deductionamount,jdbcType=DOUBLE},
+		deductionStatus = #{record.deductionstatus,jdbcType=BIGINT},
+		fundCode = #{record.fundcode,jdbcType=BIGINT},
+		fundName = #{record.fundname,jdbcType=CHAR},
+		bankCardNumber = #{record.bankcardnumber,jdbcType=BIGINT},
+		bankCardType = #{record.bankcardtype,jdbcType=VARCHAR},
+		payType = #{record.paytype,jdbcType=VARCHAR},
+		fundId = #{record.fundid,jdbcType=BIGINT},
+		userId = #{record.userid,jdbcType=BIGINT}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="cn.sz.gz.pojo.FixedInvestment">
+		update fixed_investment
+		<set>
+			<if test="fixedinvestmentitype != null">
+				fixedInvestmentIType = #{fixedinvestmentitype,jdbcType=VARCHAR},
+			</if>
+			<if test="cycle != null">
+				cycle = #{cycle,jdbcType=VARCHAR},
+			</if>
+			<if test="firstdeductiondate != null">
+				firstDeductionDate = #{firstdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="number != null">
+				number = #{number,jdbcType=BIGINT},
+			</if>
+			<if test="nextdeductiondate != null">
+				nextDeductionDate = #{nextdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deductionamount != null">
+				deductionAmount = #{deductionamount,jdbcType=DOUBLE},
+			</if>
+			<if test="deductionstatus != null">
+				deductionStatus = #{deductionstatus,jdbcType=BIGINT},
+			</if>
+			<if test="fundcode != null">
+				fundCode = #{fundcode,jdbcType=BIGINT},
+			</if>
+			<if test="fundname != null">
+				fundName = #{fundname,jdbcType=CHAR},
+			</if>
+			<if test="bankcardnumber != null">
+				bankCardNumber = #{bankcardnumber,jdbcType=BIGINT},
+			</if>
+			<if test="bankcardtype != null">
+				bankCardType = #{bankcardtype,jdbcType=VARCHAR},
+			</if>
+			<if test="paytype != null">
+				payType = #{paytype,jdbcType=VARCHAR},
+			</if>
+			<if test="fundid != null">
+				fundId = #{fundid,jdbcType=BIGINT},
+			</if>
+			<if test="userid != null">
+				userId = #{userid,jdbcType=BIGINT},
+			</if>
+		</set>
+		where fixedInvestmentId = #{fixedinvestmentid,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="cn.sz.gz.pojo.FixedInvestment">
+		update fixed_investment
+		set fixedInvestmentIType = #{fixedinvestmentitype,jdbcType=VARCHAR},
+		cycle = #{cycle,jdbcType=VARCHAR},
+		firstDeductionDate = #{firstdeductiondate,jdbcType=TIMESTAMP},
+		number = #{number,jdbcType=BIGINT},
+		nextDeductionDate = #{nextdeductiondate,jdbcType=TIMESTAMP},
+		deductionAmount = #{deductionamount,jdbcType=DOUBLE},
+		deductionStatus = #{deductionstatus,jdbcType=BIGINT},
+		fundCode = #{fundcode,jdbcType=BIGINT},
+		fundName = #{fundname,jdbcType=CHAR},
+		bankCardNumber = #{bankcardnumber,jdbcType=BIGINT},
+		bankCardType = #{bankcardtype,jdbcType=VARCHAR},
+		payType = #{paytype,jdbcType=VARCHAR},
+		fundId = #{fundid,jdbcType=BIGINT},
+		userId = #{userid,jdbcType=BIGINT}
+		where fixedInvestmentId = #{fixedinvestmentid,jdbcType=BIGINT}
+	</update>
+	<resultMap id="BaseResultMap"
+		type="cn.sz.gz.pojo.FixedInvestment">
+		<id column="fixedInvestmentId" jdbcType="BIGINT"
+			property="fixedinvestmentid" />
+		<result column="fixedInvestmentIType" jdbcType="VARCHAR"
+			property="fixedinvestmentitype" />
+		<result column="cycle" jdbcType="VARCHAR" property="cycle" />
+		<result column="firstDeductionDate" jdbcType="TIMESTAMP"
+			property="firstdeductiondate" />
+		<result column="number" jdbcType="BIGINT" property="number" />
+		<result column="nextDeductionDate" jdbcType="TIMESTAMP"
+			property="nextdeductiondate" />
+		<result column="deductionAmount" jdbcType="DOUBLE"
+			property="deductionamount" />
+		<result column="deductionStatus" jdbcType="BIGINT"
+			property="deductionstatus" />
+		<result column="fundCode" jdbcType="BIGINT" property="fundcode" />
+		<result column="fundName" jdbcType="CHAR" property="fundname" />
+		<result column="bankCardNumber" jdbcType="BIGINT"
+			property="bankcardnumber" />
+		<result column="bankCardType" jdbcType="VARCHAR"
+			property="bankcardtype" />
+		<result column="payType" jdbcType="VARCHAR" property="paytype" />
+		<result column="fundId" jdbcType="BIGINT" property="fundid" />
+		<result column="userId" jdbcType="BIGINT" property="userid" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		fixedInvestmentId, fixedInvestmentIType, cycle, firstDeductionDate, number,
+		nextDeductionDate,
+		deductionAmount, deductionStatus, fundCode, fundName, bankCardNumber, bankCardType,
+		payType, fundId, userId
+	</sql>
+	<select id="selectByExample"
+		parameterType="cn.sz.gz.pojo.FixedInvestmentExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from fixed_investment
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from fixed_investment
+		where fixedInvestmentId = #{fixedinvestmentid,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from fixed_investment
+		where fixedInvestmentId = #{fixedinvestmentid,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="cn.sz.gz.pojo.FixedInvestmentExample">
+		delete from fixed_investment
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert"
+		parameterType="cn.sz.gz.pojo.FixedInvestment">
+		insert into fixed_investment (fixedInvestmentId, fixedInvestmentIType,
+		cycle, firstDeductionDate, number,
+		nextDeductionDate, deductionAmount, deductionStatus,
+		fundCode, fundName, bankCardNumber,
+		bankCardType, payType, fundId,
+		userId)
+		values (#{fixedinvestmentid,jdbcType=BIGINT},
+		#{fixedinvestmentitype,jdbcType=VARCHAR},
+		#{cycle,jdbcType=VARCHAR}, #{firstdeductiondate,jdbcType=TIMESTAMP}, #{number,jdbcType=BIGINT},
+		#{nextdeductiondate,jdbcType=TIMESTAMP},
+		#{deductionamount,jdbcType=DOUBLE},
+		#{deductionstatus,jdbcType=BIGINT},
+		#{fundcode,jdbcType=BIGINT}, #{fundname,jdbcType=CHAR}, #{bankcardnumber,jdbcType=BIGINT},
+		#{bankcardtype,jdbcType=VARCHAR}, #{paytype,jdbcType=VARCHAR},
+		#{fundid,jdbcType=BIGINT},
+		#{userid,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="cn.sz.gz.pojo.FixedInvestment">
+		insert into fixed_investment
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="fixedinvestmentid != null">
+				fixedInvestmentId,
+			</if>
+			<if test="fixedinvestmentitype != null">
+				fixedInvestmentIType,
+			</if>
+			<if test="cycle != null">
+				cycle,
+			</if>
+			<if test="firstdeductiondate != null">
+				firstDeductionDate,
+			</if>
+			<if test="number != null">
+				number,
+			</if>
+			<if test="nextdeductiondate != null">
+				nextDeductionDate,
+			</if>
+			<if test="deductionamount != null">
+				deductionAmount,
+			</if>
+			<if test="deductionstatus != null">
+				deductionStatus,
+			</if>
+			<if test="fundcode != null">
+				fundCode,
+			</if>
+			<if test="fundname != null">
+				fundName,
+			</if>
+			<if test="bankcardnumber != null">
+				bankCardNumber,
+			</if>
+			<if test="bankcardtype != null">
+				bankCardType,
+			</if>
+			<if test="paytype != null">
+				payType,
+			</if>
+			<if test="fundid != null">
+				fundId,
+			</if>
+			<if test="userid != null">
+				userId,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="fixedinvestmentid != null">
+				#{fixedinvestmentid,jdbcType=BIGINT},
+			</if>
+			<if test="fixedinvestmentitype != null">
+				#{fixedinvestmentitype,jdbcType=VARCHAR},
+			</if>
+			<if test="cycle != null">
+				#{cycle,jdbcType=VARCHAR},
+			</if>
+			<if test="firstdeductiondate != null">
+				#{firstdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="number != null">
+				#{number,jdbcType=BIGINT},
+			</if>
+			<if test="nextdeductiondate != null">
+				#{nextdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deductionamount != null">
+				#{deductionamount,jdbcType=DOUBLE},
+			</if>
+			<if test="deductionstatus != null">
+				#{deductionstatus,jdbcType=BIGINT},
+			</if>
+			<if test="fundcode != null">
+				#{fundcode,jdbcType=BIGINT},
+			</if>
+			<if test="fundname != null">
+				#{fundname,jdbcType=CHAR},
+			</if>
+			<if test="bankcardnumber != null">
+				#{bankcardnumber,jdbcType=BIGINT},
+			</if>
+			<if test="bankcardtype != null">
+				#{bankcardtype,jdbcType=VARCHAR},
+			</if>
+			<if test="paytype != null">
+				#{paytype,jdbcType=VARCHAR},
+			</if>
+			<if test="fundid != null">
+				#{fundid,jdbcType=BIGINT},
+			</if>
+			<if test="userid != null">
+				#{userid,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample"
+		parameterType="cn.sz.gz.pojo.FixedInvestmentExample"
+		resultType="java.lang.Integer">
+		select count(*) from fixed_investment
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update fixed_investment
+		<set>
+			<if test="record.fixedinvestmentid != null">
+				fixedInvestmentId = #{record.fixedinvestmentid,jdbcType=BIGINT},
+			</if>
+			<if test="record.fixedinvestmentitype != null">
+				fixedInvestmentIType = #{record.fixedinvestmentitype,jdbcType=VARCHAR},
+			</if>
+			<if test="record.cycle != null">
+				cycle = #{record.cycle,jdbcType=VARCHAR},
+			</if>
+			<if test="record.firstdeductiondate != null">
+				firstDeductionDate = #{record.firstdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.number != null">
+				number = #{record.number,jdbcType=BIGINT},
+			</if>
+			<if test="record.nextdeductiondate != null">
+				nextDeductionDate = #{record.nextdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.deductionamount != null">
+				deductionAmount = #{record.deductionamount,jdbcType=DOUBLE},
+			</if>
+			<if test="record.deductionstatus != null">
+				deductionStatus = #{record.deductionstatus,jdbcType=BIGINT},
+			</if>
+			<if test="record.fundcode != null">
+				fundCode = #{record.fundcode,jdbcType=BIGINT},
+			</if>
+			<if test="record.fundname != null">
+				fundName = #{record.fundname,jdbcType=CHAR},
+			</if>
+			<if test="record.bankcardnumber != null">
+				bankCardNumber = #{record.bankcardnumber,jdbcType=BIGINT},
+			</if>
+			<if test="record.bankcardtype != null">
+				bankCardType = #{record.bankcardtype,jdbcType=VARCHAR},
+			</if>
+			<if test="record.paytype != null">
+				payType = #{record.paytype,jdbcType=VARCHAR},
+			</if>
+			<if test="record.fundid != null">
+				fundId = #{record.fundid,jdbcType=BIGINT},
+			</if>
+			<if test="record.userid != null">
+				userId = #{record.userid,jdbcType=BIGINT},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update fixed_investment
+		set fixedInvestmentId = #{record.fixedinvestmentid,jdbcType=BIGINT},
+		fixedInvestmentIType =
+		#{record.fixedinvestmentitype,jdbcType=VARCHAR},
+		cycle = #{record.cycle,jdbcType=VARCHAR},
+		firstDeductionDate = #{record.firstdeductiondate,jdbcType=TIMESTAMP},
+		number = #{record.number,jdbcType=BIGINT},
+		nextDeductionDate = #{record.nextdeductiondate,jdbcType=TIMESTAMP},
+		deductionAmount = #{record.deductionamount,jdbcType=DOUBLE},
+		deductionStatus = #{record.deductionstatus,jdbcType=BIGINT},
+		fundCode = #{record.fundcode,jdbcType=BIGINT},
+		fundName = #{record.fundname,jdbcType=CHAR},
+		bankCardNumber = #{record.bankcardnumber,jdbcType=BIGINT},
+		bankCardType = #{record.bankcardtype,jdbcType=VARCHAR},
+		payType = #{record.paytype,jdbcType=VARCHAR},
+		fundId = #{record.fundid,jdbcType=BIGINT},
+		userId = #{record.userid,jdbcType=BIGINT}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="cn.sz.gz.pojo.FixedInvestment">
+		update fixed_investment
+		<set>
+			<if test="fixedinvestmentitype != null">
+				fixedInvestmentIType = #{fixedinvestmentitype,jdbcType=VARCHAR},
+			</if>
+			<if test="cycle != null">
+				cycle = #{cycle,jdbcType=VARCHAR},
+			</if>
+			<if test="firstdeductiondate != null">
+				firstDeductionDate = #{firstdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="number != null">
+				number = #{number,jdbcType=BIGINT},
+			</if>
+			<if test="nextdeductiondate != null">
+				nextDeductionDate = #{nextdeductiondate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deductionamount != null">
+				deductionAmount = #{deductionamount,jdbcType=DOUBLE},
+			</if>
+			<if test="deductionstatus != null">
+				deductionStatus = #{deductionstatus,jdbcType=BIGINT},
+			</if>
+			<if test="fundcode != null">
+				fundCode = #{fundcode,jdbcType=BIGINT},
+			</if>
+			<if test="fundname != null">
+				fundName = #{fundname,jdbcType=CHAR},
+			</if>
+			<if test="bankcardnumber != null">
+				bankCardNumber = #{bankcardnumber,jdbcType=BIGINT},
+			</if>
+			<if test="bankcardtype != null">
+				bankCardType = #{bankcardtype,jdbcType=VARCHAR},
+			</if>
+			<if test="paytype != null">
+				payType = #{paytype,jdbcType=VARCHAR},
+			</if>
+			<if test="fundid != null">
+				fundId = #{fundid,jdbcType=BIGINT},
+			</if>
+			<if test="userid != null">
+				userId = #{userid,jdbcType=BIGINT},
+			</if>
+		</set>
+		where fixedInvestmentId = #{fixedinvestmentid,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="cn.sz.gz.pojo.FixedInvestment">
+		update fixed_investment
+		set fixedInvestmentIType = #{fixedinvestmentitype,jdbcType=VARCHAR},
+		cycle = #{cycle,jdbcType=VARCHAR},
+		firstDeductionDate = #{firstdeductiondate,jdbcType=TIMESTAMP},
+		number = #{number,jdbcType=BIGINT},
+		nextDeductionDate = #{nextdeductiondate,jdbcType=TIMESTAMP},
+		deductionAmount = #{deductionamount,jdbcType=DOUBLE},
+		deductionStatus = #{deductionstatus,jdbcType=BIGINT},
+		fundCode = #{fundcode,jdbcType=BIGINT},
+		fundName = #{fundname,jdbcType=CHAR},
+		bankCardNumber = #{bankcardnumber,jdbcType=BIGINT},
+		bankCardType = #{bankcardtype,jdbcType=VARCHAR},
+		payType = #{paytype,jdbcType=VARCHAR},
+		fundId = #{fundid,jdbcType=BIGINT},
+		userId = #{userid,jdbcType=BIGINT}
+		where fixedInvestmentId = #{fixedinvestmentid,jdbcType=BIGINT}
+	</update>
+</mapper>
